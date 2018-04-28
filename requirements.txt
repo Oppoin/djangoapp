@@ -1,0 +1,16 @@
+certifi==2018.4.16
+chardet==3.0.4
+Django==1.11.8
+djangorestframework==3.6.3
+djangorestframework-jsonapi==2.4.0
+dynamic-rest==1.8.1
+gevent==1.2.2
+greenlet==0.4.13
+gunicorn==19.7.1
+idna==2.6
+inflection==0.3.1
+netifaces==0.10.6
+pytz==2018.4
+requests==2.18.4
+six==1.11.0
+urllib3==1.22
