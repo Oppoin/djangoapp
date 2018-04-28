@@ -8,9 +8,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
+from dynamic_rest.viewsets import DynamicModelViewSet
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(DynamicModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
