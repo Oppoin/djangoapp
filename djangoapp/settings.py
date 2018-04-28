@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'apiplaceholder.urls'
+ROOT_URLCONF = 'djangoapp.urls'
 
 TEMPLATES = [
     {
@@ -128,7 +128,11 @@ import netifaces
 # Find out what the IP addresses are at run time
 # This is necessary because otherwise Gunicorn will reject the connections
 def ip_addresses():
-    ip_list = ['apiplaceholder.oppoin.com']
+    ip_list = [
+        'apiplaceholder.oppoin.com',
+        'djangoapp.test',
+        'apiplaceholder.test',
+    ]
     for interface in netifaces.interfaces():
         addrs = netifaces.ifaddresses(interface)
         for x in (netifaces.AF_INET, netifaces.AF_INET6):
@@ -158,7 +162,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework_json_api.renderers.JSONRenderer',
-	'dynamic_rest.renderers.DynamicBrowsableAPIRenderer',
+	    'dynamic_rest.renderers.DynamicBrowsableAPIRenderer',
     ],
    'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
 }
