@@ -17,6 +17,17 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = User.objects.all().order_by('-date_joined')
+        username = self.request.query_params.get('q', None)
+        if username is not None:
+            queryset = queryset.filter(username__icontains=username)
+        return queryset
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
