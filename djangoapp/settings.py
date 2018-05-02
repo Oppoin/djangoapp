@@ -137,6 +137,8 @@ import netifaces
 def ip_addresses():
     ip_list = [
         'apiplaceholder.oppoin.com',
+        'localhost',
+        '127.0.0.1',
         'djangoapp.test',
         'apiplaceholder.test',
     ]
