@@ -1,12 +1,15 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
+from dynamic_rest.serializers import DynamicModelSerializer
 from rest_framework import serializers
 from dynamic_rest.serializers import DynamicModelSerializer
 
 
-#class UserSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(DynamicModelSerializer):
+
     class Meta:
-        model = User
+        model = get_user_model()
+        name = 'result'
         fields = ('url', 'username', 'email', 'groups')
 
 

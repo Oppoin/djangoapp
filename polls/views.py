@@ -1,11 +1,14 @@
+from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from dynamic_rest.viewsets import DynamicModelViewSet
+
 from .models import Question, Choice
 from django.views import generic
 from django.urls import reverse
 from django.utils import timezone
 
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
 from dynamic_rest.viewsets import DynamicModelViewSet
@@ -15,8 +18,14 @@ class UserViewSet(DynamicModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+
+    def get_queryset(self, queryset=None):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        return get_user_model().objects.all().order_by('-date_joined')
 
 
 class GroupViewSet(viewsets.ModelViewSet):
