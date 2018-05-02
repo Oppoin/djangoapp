@@ -1,15 +1,16 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from dynamic_rest.viewsets import DynamicModelViewSet
-
-from .models import Question, Choice
-from django.views import generic
 from django.urls import reverse
 from django.utils import timezone
-
-from django.contrib.auth.models import Group
+from django.views import generic
+from dynamic_rest.viewsets import DynamicModelViewSet
 from rest_framework import viewsets
+
+from .models import Question, Choice
+from .pagination import PageNumberPagination
 from .serializers import UserSerializer, GroupSerializer
 
 
@@ -18,6 +19,8 @@ class UserViewSet(DynamicModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     serializer_class = UserSerializer
+    pagination_class = PageNumberPagination
+    paginate_by = settings.REST_FRAMEWORK['PAGE_SIZE']
 
     def get_queryset(self, queryset=None):
         """
