@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
@@ -20,7 +19,6 @@ class UserViewSet(DynamicModelViewSet):
     """
     serializer_class = UserSerializer
     pagination_class = PageNumberPagination
-    paginate_by = settings.REST_FRAMEWORK['PAGE_SIZE']
 
     def get_queryset(self, queryset=None):
         """

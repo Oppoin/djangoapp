@@ -161,7 +161,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
 ## DRF and drf-jsonapi and dynamic rest settings
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
-    'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
+    'EXCEPTION_HANDLER':
+        'rest_framework_json_api.exceptions.exception_handler',
     'DEFAULT_PAGINATION_CLASS': 'polls.pagination.PageNumberPagination',
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework_json_api.parsers.JSONParser',
@@ -170,7 +171,56 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework_json_api.renderers.JSONRenderer',
-	    'dynamic_rest.renderers.DynamicBrowsableAPIRenderer',
+        'dynamic_rest.renderers.DynamicBrowsableAPIRenderer',
     ],
-   'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
+    'DEFAULT_METADATA_CLASS':
+        'rest_framework_json_api.metadata.JSONAPIMetadata',
+}
+
+DYNAMIC_REST = {
+    # DEBUG: enable/disable internal debugging
+    'DEBUG': False,
+
+    # ENABLE_BROWSABLE_API: enable/disable the browsable API.
+    # It can be useful to disable it in production.
+    'ENABLE_BROWSABLE_API': True,
+
+    # ENABLE_LINKS: enable/disable relationship links
+    'ENABLE_LINKS': True,
+
+    # ENABLE_SERIALIZER_CACHE: enable/disable caching of related serializers
+    'ENABLE_SERIALIZER_CACHE': True,
+
+    # ENABLE_SERIALIZER_OPTIMIZATIONS: enable/disable representation speedups
+    'ENABLE_SERIALIZER_OPTIMIZATIONS': True,
+
+    # DEFER_MANY_RELATIONS: automatically defer many-relations, unless
+    # `deferred=False` is explicitly set on the field.
+    'DEFER_MANY_RELATIONS': False,
+
+    # MAX_PAGE_SIZE: global setting for max page size.
+    # Can be overriden at the viewset level.
+    'MAX_PAGE_SIZE': None,
+
+    # PAGE_QUERY_PARAM: global setting for the pagination query parameter.
+    # Can be overriden at the viewset level.
+    'PAGE_QUERY_PARAM': 'page',
+
+    # PAGE_SIZE: global setting for page size.
+    # Can be overriden at the viewset level.
+    # Inherit from REST_FRAMEWORK page_size settings
+    'PAGE_SIZE': REST_FRAMEWORK['PAGE_SIZE'],
+
+    # PAGE_SIZE_QUERY_PARAM: global setting for the page size query parameter.
+    # Can be overriden at the viewset level.
+    'PAGE_SIZE_QUERY_PARAM': 'per_page',
+
+    # ADDITIONAL_PRIMARY_RESOURCE_PREFIX: String to prefix additional
+    # instances of the primary resource when sideloading.
+    'ADDITIONAL_PRIMARY_RESOURCE_PREFIX': '+',
+
+    # Enables host-relative links.  Only compatible with resources registered
+    # through the dynamic router.  If a resource doesn't have a canonical
+    # path registered, links will default back to being resource-relative urls
+    'ENABLE_HOST_RELATIVE_LINKS': True
 }
