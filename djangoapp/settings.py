@@ -33,6 +33,9 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:9000'
 )
 
+# Default False and will ignore whitelist if True
+CORS_ORIGIN_ALLOW_ALL = True
+
 # Application definition
 
 INSTALLED_APPS = [
