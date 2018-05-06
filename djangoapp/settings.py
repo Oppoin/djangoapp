@@ -36,6 +36,15 @@ CORS_ORIGIN_WHITELIST = (
 # Default False and will ignore whitelist if True
 CORS_ORIGIN_ALLOW_ALL = True
 
+# Default False
+CORS_ALLOW_CREDENTIALS = True
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = default_headers + (
+    'content-length',
+)
+
 # Application definition
 
 INSTALLED_APPS = [
